@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+        header {
+            background-color: #333;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        header nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .profile-circle {
+            width: 150px;
+            height: 150px;
+            background-color: #4facfe;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 150px;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            position: relative;
+            background-image: url('https://via.placeholder.com/150'); /* Placeholder Image */
+            background-size: cover;
+            background-position: center;
+        }
+        .profile-circle input[type="file"] {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .profile-info {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: left;
+        }
+        .profile-info h2 {
+            margin-bottom: 10px;
+            font-size: 1.8em;
+            color: #333;
+        }
+        .profile-info p {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: #666;
+        }
+        .profile-info .bio {
+            font-size: 1.1em;
+            color: #444;
+        }
+        .profile-info input[type="text"], .profile-info input[type="email"], .profile-info textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .profile-info button {
+            padding: 10px 20px;
+            background-color: #4facfe;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .profile-info button:hover {
+            background-color: #00f2fe;
+        }
+        .btn-edit {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4facfe;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn-edit:hover {
+            background-color: #00f2fe;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="community.html">Community</a>
+            <a href="store.html">Store</a>
+            <a href="profile.html">Profile</a>
+        </nav>
+    </header>
+
+    <div class="profile-container">
+        <div class="profile-circle">
+            <input type="file" id="fileInput" accept="image/*" onchange="changeProfilePic(event)">
+        </div>
+
+        <div class="profile-info">
+            <h2 id="userName">John Doe</h2>
+            <p><strong>Location:</strong> <span id="userLocation">New York, USA</span></p>
+            <p><strong>Email:</strong> <span id="userEmail">johndoe@example.com</span></p>
+            <p class="bio"><strong>Bio:</strong> <span id="userBio">A passionate plant enthusiast who loves to explore different species and share tips on plant care. I believe every plant has its own unique story!</span></p>
+
+            <label for="nameInput">Name:</label>
+            <input type="text" id="nameInput" value="John Doe">
+
+            <label for="locationInput">Location:</label>
+            <input type="text" id="locationInput" value="New York, USA">
+
+            <label for="emailInput">Email:</label>
+            <input type="email" id="emailInput" value="johndoe@example.com">
+
+            <label for="bioInput">Bio:</label>
+            <textarea id="bioInput">A passionate plant enthusiast who loves to explore different species and share tips on plant care. I believe every plant has its own unique story!</textarea>
+
+            <button class="btn-edit" onclick="saveProfile()">Save Profile</button>
+        </div>
+    </div>
+
+    <footer>
+        <p style="text-align: center; padding: 20px; background-color: #333; color: white;">&copy; 2024 PlantFinder. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function changeProfilePic(event) {
+            const profileCircle = document.querySelector('.profile-circle');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileCircle.style.backgroundImage = `url(${e.target.result})`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('nameInput').value;
+            const location = document.getElementById('locationInput').value;
+            const email = document.getElementById('emailInput').value;
+            const bio = document.getElementById('bioInput').value;
+
+            document.getElementById('userName').textContent = name;
+            document.getElementById('userLocation').textContent = location;
+            document.getElementById('userEmail').textContent = email;
+            document.getElementById('userBio').textContent = bio;
+
+            alert('Profile saved successfully!');
+        }
+    </script>
+
+</body>
+</html>

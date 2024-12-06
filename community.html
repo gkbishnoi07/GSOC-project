@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Chat - Community</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        header {
+            background-color: #333;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+        header nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Chat Section */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .chat-box {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .chat-box .message {
+            margin-bottom: 10px;
+            padding: 5px;
+            background-color: #e9e9e9;
+            border-radius: 5px;
+        }
+        .chat-box .message.user {
+            background-color: #4facfe;
+            color: white;
+            text-align: right;
+        }
+        .chat-box .message.bot {
+            background-color: #e9e9e9;
+            text-align: left;
+        }
+        .chat-input-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .chat-input {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .send-btn {
+            width: 15%;
+            padding: 10px;
+            background-color: #4facfe;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .send-btn:hover {
+            background-color: #00f2fe;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="store.html">Store</a>
+            <a href="profile.html">Profile</a>
+        </nav>
+    </header>
+
+    <div class="chat-container">
+        <h3>Live Chat: Discuss Plants</h3>
+
+        <!-- Chat Box -->
+        <div class="chat-box" id="chatBox">
+            <!-- Messages will appear here -->
+        </div>
+
+        <!-- Input and Send Button -->
+        <div class="chat-input-container">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Ask about plants..." />
+            <button class="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <footer>
+        <p style="text-align: center; padding: 20px; background-color: #333; color: white;">&copy; 2024 PlantFinder. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function sendMessage() {
+            const chatBox = document.getElementById("chatBox");
+            const chatInput = document.getElementById("chatInput");
+            const message = chatInput.value;
+
+            if (message.trim() === "") return;
+
+            // Display user message
+            const userMessage = document.createElement("div");
+            userMessage.classList.add("message", "user");
+            userMessage.textContent = message;
+            chatBox.appendChild(userMessage);
+
+            // Scroll to the bottom of the chat box
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Clear the input field
+            chatInput.value = "";
+
+            // Simulate bot reply (in real application, this could be replaced with a bot or another user message)
+            setTimeout(() => {
+                const botMessage = document.createElement("div");
+                botMessage.classList.add("message", "bot");
+                botMessage.textContent = "That's a great question! Let's discuss more about it.";
+                chatBox.appendChild(botMessage);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
